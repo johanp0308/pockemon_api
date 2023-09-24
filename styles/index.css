@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;1,100&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 10px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.lista_pokemons{
+    width: 100%;
+    background-color: rgb(63, 61, 61);
+    height: auto;
+    display:  flex;
+    padding: 1rem;
+}
+
+.lista_pokemons .pokemon{
+    text-align: center;
+    font-size: 2rem;
+    max-width: 200px;
+    background-color: beige;
+    border-radius: 2.3rem;
+    padding: 1rem;
+}
+
+.pokemon img{
+    width: 100%;
+}
