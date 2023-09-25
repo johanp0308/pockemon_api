@@ -1,5 +1,4 @@
 
-
 const captfirts = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
@@ -11,6 +10,7 @@ const agregarTarjeta = (contain,data) =>{
         <p id="${data.name}">${captfirts(data.name)}</p>
     </div>
     `);
+
 }
 
 
