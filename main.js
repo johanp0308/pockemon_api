@@ -10,8 +10,15 @@ const asignEvent = () =>{
     let pokemons = document.querySelectorAll(".pokemon");
 
     pokemons.forEach((nodeElem)=>{
-        nodeElem.addEventListener("click",(event)=>{
-            
+        nodeElem.addEventListener("click",(event)=>{ 
+            Swal.fire({
+                title: 'Sweet!',
+                text: 'Modal with a custom image.',
+                imageUrl: '',
+                imageWidth: 400,
+                imageHeight: 200,
+                imageAlt: 'Custom image',
+              })
         })
     })
 }
