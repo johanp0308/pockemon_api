@@ -5,15 +5,26 @@ const captfirts = (str) => {
 
 const agregarTarjeta = (contain,data) =>{
     contain.insertAdjacentHTML("beforeend",`
-    <div class="pokemon">
+    <div id="${data.name}" class="pokemon">
         <img src="${data.img}" alt="">
-        <p id="${data.name}">${captfirts(data.name)}</p>
+        <p class="pokeID">${captfirts(data.name)}</p>
     </div>
     `);
 
 }
 
 
+const agregarBotones = (contain,res) =>{
+    console.log(res)
+    
+    contain.insertAdjacentHTML("beforeend",)
+
+    contain.addEventListener("click",)
+}
+
+
 export default{
-    agregarTarjeta
+    agregarTarjeta,
+    captfirts,
+    agregarBotones
 }
