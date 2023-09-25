@@ -12,19 +12,22 @@ html{
 }
 
 .lista_pokemons{
+    display:  flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     width: 100%;
     background-color: rgb(63, 61, 61);
     height: auto;
-    display:  flex;
     padding: 1rem;
 }
 
 .lista_pokemons .pokemon{
-    text-align: center;
     font-size: 2rem;
-    max-width: 200px;
-    background-color: beige;
+    text-align: center;
     border-radius: 2.3rem;
+    background-color: beige;
+    max-width: 20rem;
+    margin: 1rem;
     padding: 1rem;
 }
 
