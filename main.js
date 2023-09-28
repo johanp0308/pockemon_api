@@ -6,7 +6,7 @@ const Q = (e) => d.querySelector(e);
 const Qa = (e) => d.querySelectorAll(e)
 var urlmain = "https://pokeapi.co/api/v2/pokemon/";
 var urlPoke = "https://pokeapi.co/api/v2/pokemon/";
-var ulrMockAPI = "https://6509d04cf6553137159c10aa.mockapi.io/pokemones"
+var urlMockAPI = "https://6509d04cf6553137159c10aa.mockapi.io/pokemones"
 let todosPokemon =[];
 
 
@@ -104,9 +104,8 @@ document.addEventListener("submit",(e)=>{
         let dataForm = Object.fromEntries(new FormData(e.target));
         let data = {
             name: poke,
-            stats:data
+            stats:dataForm
         }
-        
+	resPoke.enviarPokemon(urlMockAPI,data);
     }
-    
 });
