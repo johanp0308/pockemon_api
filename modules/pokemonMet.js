@@ -7,22 +7,18 @@ const peticiones = async (urlRes) => {
 const exitPoke = async(url,name) =>{
     let res = await peticiones(url);
     console.log(res);
-    let isExist = {};
+    let isExist = {
+        isExist:false,
+        id:0,
+    };
     res.forEach( ele => {
-        console.log(ele.name)
         if(ele.name === name){
             isExist = {
                 isExist:true,
                 id:ele.id
             }
-        }else{
-            isExist = {
-                isExist:false,
-                id:0,
-            }
         }
     })
-    console.log(isExist);
     return isExist
 }
 
@@ -49,5 +45,6 @@ const enviarPokemon = async (url,data) =>{
 
 export default{
     peticiones,
-    enviarPokemon
+    enviarPokemon,
+    exitPoke
 }
