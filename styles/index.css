@@ -11,6 +11,13 @@ html{
     font-family: 'Roboto', sans-serif;
 }
 
+
+#form-mockapi{
+    display: flex;
+    flex-direction: column;
+    font-size: 1.4rem;
+}
+
 .lista_pokemons{
     display:  flex;
     flex-direction: row;
