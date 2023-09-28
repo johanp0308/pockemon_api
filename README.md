@@ -55,6 +55,17 @@ data = {
 ```
 
 
+## How To Use
+
+To use the page we must click on the pokemons and see their information
+
+![imgen](./img/Screenshot%20from%202023-09-28%2011-42-00.png)
+
+Range inputs can be modified and will be sent to the mockapi
+
+![imgen](./img/Screenshot%20from%202023-09-28%2011-46-28.png)
+
+
 ## Author
 
 - [@johanp0308](https://github.com/johanp0308)
