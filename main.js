@@ -6,6 +6,7 @@ const Q = (e) => d.querySelector(e);
 const Qa = (e) => d.querySelectorAll(e)
 var urlmain = "https://pokeapi.co/api/v2/pokemon/";
 var urlPoke = "https://pokeapi.co/api/v2/pokemon/";
+var ulrMockAPI = "https://6509d04cf6553137159c10aa.mockapi.io/pokemones"
 let todosPokemon =[];
 
 
@@ -42,15 +43,14 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
 document.addEventListener("click",(e)=>{
     try{
-        console.log(e.target);
+        // Boton para Cambiar a la pagina Anterior
         if(e.target.matches("#btn-previous i")){
             resPoke.peticiones(urlmain).then(result=>{
-                console.log(result);
                 urlmain = result.previous;
                 init(urlmain);
             })
         }
-
+        // Boton para Cambiar a la siguiente pagina
         if(e.target.matches("#btn-next i")){
             resPoke.peticiones(urlmain).then(result=>{
                 console.log(result);
@@ -58,12 +58,11 @@ document.addEventListener("click",(e)=>{
                 init(urlmain);
             })
         }
+        // Evento para Lanzar el SweetAlert 
         if(e.target.matches(".pokemon img, .pokemon p")){
             let id = e.target.parentElement.id;
             let res = resPoke.peticiones(urlPoke+id);
-            console.log(urlPoke+id)
             res.then(result => {
-                console.log(result)
                 let img = result.sprites.front_default;
                     let imgDefautl = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/029b8bd9-cb5a-41e4-9c7e-ee516face9bb/dayo3ow-7ac86c31-8b2b-4810-89f2-e6134caf1f2d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzAyOWI4YmQ5LWNiNWEtNDFlNC05YzdlLWVlNTE2ZmFjZTliYlwvZGF5bzNvdy03YWM4NmMzMS04YjJiLTQ4MTAtODlmMi1lNjEzNGNhZjFmMmQuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ooubhxjHp9PIMhVxvCFHziI6pxDAS8glXPWenUeomWs"
                     Swal.fire({
@@ -72,18 +71,42 @@ document.addEventListener("click",(e)=>{
                         imageWidth: "200px",
                         imageHeight: "auto",
                         imageAlt: 'Custom image',
-                        html: result.stats.map(stat => `
-                        <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar" style="width: ${stat.base_stat}%"></div>
-                        </div>
-                        <p class="stats-poke" id="${stat.stat.name}">${domPoke.captfirts(stat.stat.name)}</p>
-                        `).join(""),
+                        html: `
+                        <form id="form-mockapi" class="${result.name}">
+                        ${result.stats.map(stat => `
+                            <div>
+                                <input type="range" name="${stat.stat.name}" id="" value="${stat.base_stat}" max="200" min="0">
+                                <span class="stats-poke" id="${stat.stat.name}"> <b class="stat-number">${stat.base_stat}</b> ${domPoke.captfirts(stat.stat.name)}</span>
+                            </div>
+                        `).join("")}
+                            <input type="submit" value="Aplicar">
+                        </form>
+                        `,
                     });
             })
+        }
+        // Evento especifico para los Inputs Ranges
+        if(e.target.matches("form#form-mockapi input")){
+            let parent = e.target.parentElement
+            let idstat = parent.querySelector("span.stats-poke").id
+            let boldEle = parent.querySelector(".stat-number");
+            boldEle.innerHTML = `${parent.querySelector("input").value}`
         }
     }catch{
 
     }
 })
 
-
+document.addEventListener("submit",(e)=>{
+    if(e.target.matches("#form-mockapi")){
+        e.preventDefault();
+        let poke = e.target.classList[0];
+        let dataForm = Object.fromEntries(new FormData(e.target));
+        let data = {
+            name: poke,
+            stats:data
+        }
+        
+    }
+    
+});
