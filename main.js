@@ -60,35 +60,61 @@ document.addEventListener("click",(e)=>{
         }
         // Evento para Lanzar el SweetAlert 
         if(e.target.matches(".pokemon img, .pokemon p")){
-            let id = e.target.parentElement.id;
-            let resMock = resPoke.isExist(urlMockAPI,id);
             
+            let id = e.target.parentElement.id;
+            
+            let resMock = resPoke.exitPoke(urlMockAPI,id);
             let res = resPoke.peticiones(urlPoke+id);
-            console.log(res)
-            res.then(async (result) => {
-                console.log(result)
-
+            res.then( async (result) => {
+                console.log(result);
                 let img = result.sprites.front_default;
                 let imgDefautl = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/029b8bd9-cb5a-41e4-9c7e-ee516face9bb/dayo3ow-7ac86c31-8b2b-4810-89f2-e6134caf1f2d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzAyOWI4YmQ5LWNiNWEtNDFlNC05YzdlLWVlNTE2ZmFjZTliYlwvZGF5bzNvdy03YWM4NmMzMS04YjJiLTQ4MTAtODlmMi1lNjEzNGNhZjFmMmQuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ooubhxjHp9PIMhVxvCFHziI6pxDAS8glXPWenUeomWs"
-                Swal.fire({
-                    title: domPoke.captfirts(result.name),
-                    imageUrl: img ? img : imgDefautl,
-                    imageWidth: "200px",
-                    imageHeight: "auto",
-                    imageAlt: 'Custom image',
-                    html: `
-                    <form id="form-mockapi" class="${result.name}">
-                    ${result.stats.map(stat => `
-                        <div>
-                            <input type="range" name="${stat.stat.name}" id="" value="${stat.base_stat}" max="200" min="0">
-                            <span class="stats-poke" id="${stat.stat.name}"> <b class="stat-number">${stat.base_stat}</b> ${domPoke.captfirts(stat.stat.name)}</span>
-                        </div>
-                    `).join("")}
-                        <input type="submit" value="Aplicar">
-                    </form>
-                    `,
-                });
+                if(!(await resMock).isExist === true) {
+                    Swal.fire({
+                        title: domPoke.captfirts(result.name),
+                        imageUrl: img ? img : imgDefautl,
+                        imageWidth: "200px",
+                        imageHeight: "auto",
+                        imageAlt: 'Custom image',
+                        html: `
+                        <form id="form-mockapi" class="${result.name}">
+                        ${result.stats.map(stat => `
+                            <div>
+                                <input type="range" name="${stat.stat.name}" id="" value="${stat.base_stat}" max="200" min="0">
+                                <span class="stats-poke" id="${stat.stat.name}"> <b class="stat-number">${stat.base_stat}</b> ${domPoke.captfirts(stat.stat.name)}</span>
+                            </div>
+                        `).join("")}
+                            <input type="submit" value="Aplicar">
+                        </form>
+                        `,
+                    });
+                }else{
+                    let data = await (await fetch(urlMockAPI+"/"+(await resMock).id)).json();
+                    console.log(data.name);
+                    Swal.fire({
+                        title: domPoke.captfirts(data.name),
+                        imageUrl: img ? img : imgDefautl,
+                        imageWidth: "200px",
+                        imageHeight: "auto",
+                        imageAlt: 'Custom image',
+                        html: `
+                        <form id="form-mockapi" class="${data.name}">
+                        ${data.stats.keys().map((stat) => 
+                            console.log(stat)
+                            `
+                            <div>
+                                <input type="range" name="${stat}" id="" value="${stat}" max="200" min="0">
+                                <span class="stats-poke" id="${stat}"> <b class="stat-number">${stat}</b> ${domPoke.captfirts(stat)}</span>
+                            </div>
+                        `).join("")}
+                            <input type="submit" value="Aplicar">
+                        </form>
+                        `,
+                    });
+                }
             })
+
+
         }
         // Evento especifico para los Inputs Ranges
         if(e.target.matches("form#form-mockapi input")){
