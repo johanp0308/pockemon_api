@@ -90,7 +90,8 @@ document.addEventListener("click",(e)=>{
                     });
                 }else{
                     let data = await (await fetch(urlMockAPI+"/"+(await resMock).id)).json();
-                    console.log(data.name);
+                    // let arr  = Object.keys(data.stats);
+                    // console.log(arr);
                     Swal.fire({
                         title: domPoke.captfirts(data.name),
                         imageUrl: img ? img : imgDefautl,
@@ -99,12 +100,11 @@ document.addEventListener("click",(e)=>{
                         imageAlt: 'Custom image',
                         html: `
                         <form id="form-mockapi" class="${data.name}">
-                        ${data.stats.keys().map((stat) => 
-                            console.log(stat)
+                        ${Object.keys(data.stats).map((stat) => 
                             `
                             <div>
-                                <input type="range" name="${stat}" id="" value="${stat}" max="200" min="0">
-                                <span class="stats-poke" id="${stat}"> <b class="stat-number">${stat}</b> ${domPoke.captfirts(stat)}</span>
+                                <input type="range" name="${stat}" id="" value="${data.stats[stat]}" max="200" min="0">
+                                <span class="stats-poke" id="${stat}"> <b class="stat-number">${data.stats[stat]}</b> ${domPoke.captfirts(stat)}</span>
                             </div>
                         `).join("")}
                             <input type="submit" value="Aplicar">
