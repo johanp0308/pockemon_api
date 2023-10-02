@@ -67,7 +67,7 @@ Range inputs can be modified and will be sent to the mockapi
 
 To add pokemon statistics to the mockapi what we must do is click on the "Apply" button
 
-![imagen](./img/img-12.png);
+![imagen](./img/img-12.PNG);
 
 
 ## Author
