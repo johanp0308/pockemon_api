@@ -6,7 +6,7 @@ const Q = (e) => d.querySelector(e);
 const Qa = (e) => d.querySelectorAll(e)
 var urlmain = "https://pokeapi.co/api/v2/pokemon/";
 var urlPoke = "https://pokeapi.co/api/v2/pokemon/";
-var urlMockAPI = "https://6509d04cf6553137159c10aa.mockapi.io/pokemones"
+var urlMockAPI = "http://127.0.0.10:5010/pokemones"
 let todosPokemon =[];
 
 
@@ -64,6 +64,7 @@ document.addEventListener("click",(e)=>{
             let id = e.target.parentElement.id;
             
             let resMock = resPoke.exitPoke(urlMockAPI,id);
+            console.log(resMock)
             let res = resPoke.peticiones(urlPoke+id);
             res.then( async (result) => {
                 console.log(result);
