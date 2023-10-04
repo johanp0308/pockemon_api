@@ -23,7 +23,7 @@ html{
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    background-color: rgb(63, 61, 61);
+    background-color: rgb(158, 84, 84, .3);
     height: auto;
     padding: 1rem;
 }
@@ -53,6 +53,11 @@ html{
 
 }
 
+.pokemon-section{
+    background-image: url(../img/2358.jpg);
+    background-size: cover;
+}
+
 .pokemon img:hover{
     filter: drop-shadow(0 10px 15px rgba(0,0,0));
 }
@@ -64,7 +69,15 @@ html{
     flex-direction: row;
     justify-content: center;    
     width: 100%;
-    background-color: rgb(63, 61, 61);
+    background-color: rgb(63, 61, 61, .3);
 }
 
+.titulo{
+    width: 100%;
+    background-size: cover;
+}
+
+.titulo img{
+    width: 100%;
+}
 
